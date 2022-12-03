@@ -1,0 +1,35 @@
+{
+  "main": "./dist/draggable.common.js",
+  "name": "draggable-vue-libary",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --name draggable src/index.js",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.0.96",
+    "@vue/runtime-dom": "^3.2.37",
+    "core-js": "^3.8.3",
+    "minify-css-string": "^1.0.0",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "vue": "^2.6.14",
+    "vue-drag-resize": "^1.5.4",
+    "vue-resize-directive": "^1.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "^5.0.0",
+    "@vue/cli-plugin-eslint": "^5.0.0",
+    "@vue/cli-service": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "prettier": "^2.4.1",
+    "vue-template-compiler": "^2.6.14"
+  }
+}

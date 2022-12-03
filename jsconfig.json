@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@constant/*": ["src/constant/*"],
+      "@utils/*": ["src/utils/*"],
+      "@app.config": ["src/app.config.json"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  "vueCompilerOptions": {
+    "target": 2,
+    "experimentalDisableTemplateSupport": true
+  }
+}

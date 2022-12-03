@@ -1,0 +1,151 @@
+<template>
+  <div class="card" :style="cardStyle" v-on="$listeners" v-bind="$attrs">
+    <div class="card-container">
+      <slot />
+    </div>
+    <div class="card-arrow">
+      <div class="card-arrow-top-left"></div>
+      <div class="card-arrow-top-right"></div>
+      <div class="card-arrow-bottom-left"></div>
+      <div class="card-arrow-bottom-right"></div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    height: {},
+    width: {}
+  },
+  data: () => ({}),
+  computed: {
+    cardStyle() {
+      return { height: this.height, width: this.width };
+    }
+  },
+  methods: {}
+};
+</script>
+
+<style scoped lang="scss">
+.card {
+  background-color: rgba(32, 43, 54, 0.9);
+  color: #fff;
+  button {
+    color: #fff;
+  }
+
+  position: relative;
+  border: none;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+  }
+  &:not(.border-0):before {
+    left: 15px;
+    right: 15px;
+    top: 0;
+    bottom: 0;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    opacity: 0.3;
+    background: transparent;
+  }
+  &:not(.border-0):after {
+    top: 15px;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    opacity: 0.3;
+    background: transparent;
+  }
+
+  &
+    > *:not(.card-arrow):not(.card-img-overlay):not(.card-img):not(.hljs-container) {
+    position: relative;
+    z-index: 10;
+  }
+  & .card-arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  & .card-arrow-top-left,
+  & .card-arrow-top-right,
+  & .card-arrow-bottom-left,
+  & .card-arrow-bottom-right {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 2px;
+      height: 8px;
+      background: #fff;
+      opacity: 0.75;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 2px;
+      background: #fff;
+      opacity: 0.75;
+    }
+  }
+  & .card-arrow-top-left,
+  & .card-arrow-top-right {
+    top: 0;
+
+    &:before {
+      top: 2px;
+    }
+    &:after {
+      top: 0;
+    }
+  }
+  & .card-arrow-bottom-left,
+  & .card-arrow-bottom-right {
+    bottom: 0;
+
+    &:before {
+      bottom: 2px;
+    }
+    &:after {
+      bottom: 0;
+    }
+  }
+  & .card-arrow-top-left,
+  & .card-arrow-bottom-left {
+    left: 0;
+
+    &:before,
+    &:after {
+      left: 0;
+    }
+  }
+  & .card-arrow-top-right,
+  & .card-arrow-bottom-right {
+    right: 0;
+
+    &:before,
+    &:after {
+      right: 0;
+    }
+  }
+}
+
+.card,
+.card-container {
+  height: 100%;
+}
+</style>
