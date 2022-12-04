@@ -214,7 +214,7 @@ export default {
 .draggable-sidebar-heading__content {
   height: 48px;
 }
-.draggable-sidebar-heading >>> .map-control-button {
+.draggable-sidebar-heading :deep(.map-control-button) {
   background-color: unset;
 }
 .draggable-sidebar-heading__title {

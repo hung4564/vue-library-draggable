@@ -157,7 +157,7 @@ export default {
 .draggable-bottom-heading__content {
   height: 48px;
 }
-.draggable-bottom-heading >>> .map-control-button {
+.draggable-bottom-heading :deep(.map-control-button) {
   background-color: unset;
 }
 .draggable-bottom-heading__title {

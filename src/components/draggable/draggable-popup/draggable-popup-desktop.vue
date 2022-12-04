@@ -273,7 +273,7 @@ export default {
 .draggable-popup-desktop-heading__content {
   height: 48px;
 }
-.draggable-popup-desktop-heading >>> .map-control-button {
+.draggable-popup-desktop-heading :deep(.map-control-button) {
   background-color: unset;
 }
 .draggable-popup-desktop-heading__title {

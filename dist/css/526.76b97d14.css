@@ -1,0 +1,11 @@
+
+.draggable-popup {
+  pointer-events: all;
+}
+.draggable-popup .map-spacer {
+  flex-grow: 1;
+}
+.draggable-popup.vdr::before {
+  outline: none !important;
+}
+
