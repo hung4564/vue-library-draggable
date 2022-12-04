@@ -46,7 +46,7 @@
                   : "mdi-arrow-down-drop-circle-outline"
               }}</map-icon>
             </map-button>
-            <map-button v-if="!disableClose" icon small @click="onClose">
+            <map-button v-if="!disabledClose" icon small @click="onClose">
               <map-icon small>mdi-close</map-icon>
             </map-button>
           </div>
@@ -92,7 +92,10 @@ export default {
     top: { type: Number, default: undefined },
     left: { type: Number, default: undefined },
     bottom: { type: Number, default: undefined },
-    right: { type: Number, default: undefined }
+    right: { type: Number, default: undefined },
+    centerX: Boolean,
+    centerY: Boolean,
+    center: Boolean
   },
   data: () => ({
     drag_id: `popup-${getUUIDv4()}`,
@@ -111,10 +114,10 @@ export default {
     this.p_y = 0;
     this.p_height = this.height;
     this.p_width = this.width;
-    register(this.container_id, this.drag_id, {
+    register(this.containerId, this.drag_id, {
       setIndex: this.onSetIndex.bind(this)
     });
-    registerShow(this.container_id, this.drag_id, this.show);
+    registerShow(this.containerId, this.drag_id, this.show);
     this.$nextTick(() => {
       if (this.show)
         this.$nextTick(() => {
@@ -123,7 +126,7 @@ export default {
     });
   },
   beforeDestroy() {
-    unRegister(this.container_id, this.drag_id);
+    unRegister(this.containerId, this.drag_id);
   },
   watch: {
     height: {
@@ -149,7 +152,7 @@ export default {
   },
   computed: {
     c_popupIds() {
-      return getPopupIdsShow(this.container_id);
+      return getPopupIdsShow(this.containerId);
     },
     c_show: {
       get() {
@@ -158,8 +161,8 @@ export default {
       set(val) {
         this.p_show = val;
         this.$emit("update:show", val);
-        if (this.container_id && this.drag_id)
-          registerShow(this.container_id, this.drag_id, val);
+        if (this.containerId && this.drag_id)
+          registerShow(this.containerId, this.drag_id, val);
       }
     },
     isExpanded() {
@@ -172,10 +175,10 @@ export default {
       return this.minHeigth;
     },
     c_parentWidth() {
-      return getParentWidth(this.container_id);
+      return getParentWidth(this.containerId);
     },
     c_parentHeight() {
-      return getParentHeight(this.container_id);
+      return getParentHeight(this.containerId);
     }
   },
   methods: {
@@ -201,6 +204,12 @@ export default {
       if (!isNil(this.bottom)) {
         this.p_y = this.c_parentHeight - this.bottom - this.p_height;
       }
+      if (this.center || this.centerX) {
+        this.p_x = (this.c_parentWidth - this.p_width) / 2;
+      }
+      if (this.center || this.centerY) {
+        this.p_y = (this.c_parentHeight - this.p_height) / 2;
+      }
       this.init_done = true;
     },
     toggleExpanded() {
@@ -211,10 +220,10 @@ export default {
       this.p_height = newRect.height;
     },
     onToBack() {
-      setToBack(this.container_id, this.drag_id);
+      setToBack(this.containerId, this.drag_id);
     },
     onToFront() {
-      setToFront(this.container_id, this.drag_id);
+      setToFront(this.containerId, this.drag_id);
     }
   }
 };

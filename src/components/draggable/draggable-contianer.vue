@@ -1,6 +1,6 @@
 <template>
   <div v-resize="onResize" class="draggable-container">
-    <slot v-if="drag_id && init_done" />
+    <slot v-if="container_id && init_done" />
   </div>
 </template>
 
@@ -19,11 +19,11 @@ export default {
   },
   components: {},
   data: () => ({
-    drag_id: `draggable-container-${getUUIDv4()}`,
+    container_id: `draggable-container-${getUUIDv4()}`,
     init_done: false
   }),
   mounted() {
-    setDraggableContainer(this.drag_id);
+    setDraggableContainer(this.container_id);
     this.$nextTick(() => {
       this.onResize();
       window.addEventListener("resize", this.onResize);
@@ -31,23 +31,23 @@ export default {
     });
   },
   beforeDestroy() {
-    removeDraggableContainer(this.drag_id);
+    removeDraggableContainer(this.container_id);
     window.removeEventListener("resize", this.onResize);
   },
 
   computed: {
     store() {
-      return getStoreDraggable(this.drag_id);
+      return getStoreDraggable(this.container_id);
     }
   },
   provide() {
     return {
-      drag_id: this.drag_id
+      containerId: this.container_id
     };
   },
   methods: {
     onResize() {
-      setParentProps(this.drag_id, {
+      setParentProps(this.container_id, {
         width: this.$el.clientWidth,
         height: this.$el.clientHeight
       });

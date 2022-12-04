@@ -15,6 +15,17 @@
         <div style="height: 100vh"></div>
       </DraggablePopup>
 
+      <DraggablePopup show title="popup 3" center :width="400">
+        <div style="height: 100vh"></div>
+      </DraggablePopup>
+      <DraggablePopup show title="popup 4" centerX :bottom="10" :width="400">
+        <div style="height: 100vh"></div>
+      </DraggablePopup>
+
+      <DraggablePopup show title="popup 5" centerY :left="10" :width="400">
+        <div style="height: 100vh"></div>
+      </DraggablePopup>
+
       <DraggableSidebar title="siderbar 1" show>
         <div style="height: 100vh"></div>
       </DraggableSidebar>

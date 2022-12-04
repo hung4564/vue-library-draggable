@@ -23,7 +23,7 @@
                 <map-icon small>mdi-arrange-send-backward</map-icon>
               </map-button>
             </template>
-            <map-button v-if="!disableClose" icon small @click="onClose">
+            <map-button v-if="!disabledClose" icon small @click="onClose">
               <map-icon small>mdi-close</map-icon>
             </map-button>
           </div>
@@ -62,8 +62,7 @@ export default {
       default: ""
     },
     right: Boolean,
-    zIndex: {},
-    disableClose: { type: Boolean, default: false }
+    disabledClose: { type: Boolean, default: false }
   },
   data: () => ({
     drag_id: `sidebar-${getUUIDv4()}`,
@@ -80,14 +79,14 @@ export default {
     }
   },
   mounted() {
-    register(this.container_id, this.drag_id, {
+    register(this.containerId, this.drag_id, {
       setIndex: this.onSetIndex.bind(this),
       position: this.position
     });
-    registerShow(this.container_id, this.drag_id, this.show);
+    registerShow(this.containerId, this.drag_id, this.show);
   },
   beforeDestroy() {
-    unRegister(this.container_id, this.drag_id);
+    unRegister(this.containerId, this.drag_id);
   },
   computed: {
     position() {
@@ -98,10 +97,10 @@ export default {
       return this.c_left_popupIds;
     },
     c_right_popupIds() {
-      return getSidebarIdsShow(this.container_id, "right");
+      return getSidebarIdsShow(this.containerId, "right");
     },
     c_left_popupIds() {
-      return getSidebarIdsShow(this.container_id, "left");
+      return getSidebarIdsShow(this.containerId, "left");
     },
     c_show: {
       get() {
@@ -110,8 +109,8 @@ export default {
       set(val) {
         this.p_show = val;
         this.$emit("update:show", val);
-        if (this.container_id && this.drag_id)
-          registerShow(this.container_id, this.drag_id, val);
+        if (this.containerId && this.drag_id)
+          registerShow(this.containerId, this.drag_id, val);
       }
     }
   },
@@ -120,10 +119,10 @@ export default {
       this.c_show = false;
     },
     onToBack() {
-      setToBack(this.container_id, this.drag_id);
+      setToBack(this.containerId, this.drag_id);
     },
     onToFront() {
-      setToFront(this.container_id, this.drag_id);
+      setToFront(this.containerId, this.drag_id);
     }
   }
 };

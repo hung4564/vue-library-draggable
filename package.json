@@ -1,6 +1,6 @@
 {
   "main": "./dist/draggable.common.js",
-  "name": "draggable-vue-libary",
+  "name": "vue-libary-draggable",
   "version": "0.1.0",
   "private": true,
   "scripts": {

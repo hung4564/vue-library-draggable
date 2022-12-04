@@ -3,8 +3,8 @@ import { checkIsFirst, checkIsLast } from "./store/store-draggable";
 export default {
   props: {
     show: Boolean,
-    container_id: { type: String, required: true },
-    disableClose: { type: Boolean, default: false },
+    containerId: { type: String, required: true },
+    disabledClose: { type: Boolean, default: false },
     title: {
       type: String,
       default: ""
@@ -42,12 +42,12 @@ export default {
     updateZIndex() {
       this.$nextTick(() => {
         this.isLast = checkIsLast(
-          this.container_id,
+          this.containerId,
           this.drag_id,
           this.c_popupIds
         );
         this.isFirst = checkIsFirst(
-          this.container_id,
+          this.containerId,
           this.drag_id,
           this.c_popupIds
         );

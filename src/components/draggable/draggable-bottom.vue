@@ -6,12 +6,12 @@
     :style="{ zIndex: p_zIndex, height: isFullScreen ? '100%' : '45%' }"
   >
     <map-card>
-      <div class="draggable-mobile">
-        <div class="draggable-mobile-heading">
-          <div class="draggable-mobile-heading__title">
+      <div class="draggable-bottom">
+        <div class="draggable-bottom-heading">
+          <div class="draggable-bottom-heading__title">
             <slot name="title"></slot>
           </div>
-          <div class="draggable-mobile-heading__content"> </div>
+          <div class="draggable-bottom-heading__content"> </div>
           <div class="map-spacer"></div>
           <slot name="extra-btn"></slot>
 
@@ -39,13 +39,13 @@
             </map-icon>
             <map-icon v-else> mdi-arrow-up-drop-circle-outline </map-icon>
           </map-button>
-          <map-button v-if="!disableClose" icon small @click="onClose">
+          <map-button v-if="!disabledClose" icon small @click="onClose">
             <map-icon>mdi-close</map-icon>
           </map-button>
         </div>
 
         <hr class="map-divider" />
-        <div class="draggable-mobile-content">
+        <div class="draggable-bottom-content">
           <slot></slot>
         </div>
       </div>
@@ -76,13 +76,13 @@ export default {
     drag_id: `mobile-${getUUIDv4()}`
   }),
   mounted() {
-    register(this.container_id, this.drag_id, {
+    register(this.containerId, this.drag_id, {
       setIndex: this.onSetIndex.bind(this)
     });
-    registerShow(this.container_id, this.drag_id, this.show);
+    registerShow(this.containerId, this.drag_id, this.show);
   },
   beforeDestroy() {
-    unRegister(this.container_id, this.drag_id);
+    unRegister(this.containerId, this.drag_id);
   },
   watch: {},
   computed: {
@@ -93,12 +93,12 @@ export default {
       set(val) {
         this.p_show = val;
         this.$emit("update:show", val);
-        if (this.container_id && this.drag_id)
-          registerShow(this.container_id, this.drag_id, val);
+        if (this.containerId && this.drag_id)
+          registerShow(this.containerId, this.drag_id, val);
       }
     },
     c_popupIds() {
-      return getMobileIdsShow(this.container_id);
+      return getMobileIdsShow(this.containerId);
     }
   },
   methods: {
@@ -106,17 +106,17 @@ export default {
       this.isFullScreen = !this.isFullScreen;
     },
     onToBack() {
-      setToBack(this.container_id, this.drag_id);
+      setToBack(this.containerId, this.drag_id);
     },
     onToFront() {
-      setToFront(this.container_id, this.drag_id);
+      setToFront(this.containerId, this.drag_id);
     }
   }
 };
 </script>
 
 <style scoped>
-.draggable-mobile .map-divider {
+.draggable-bottom .map-divider {
   flex-grow: 0;
 }
 .popup-mobile-container {
@@ -125,7 +125,7 @@ export default {
   left: 0;
   width: 100%;
 }
-.draggable-mobile {
+.draggable-bottom {
   height: 100%;
   width: 100%;
   display: flex;
@@ -133,7 +133,7 @@ export default {
   overflow: hidden;
 }
 
-.draggable-mobile-heading {
+.draggable-bottom-heading {
   align-items: center;
   display: flex;
   position: relative;
@@ -142,26 +142,26 @@ export default {
   max-width: 100%;
   padding: 0 8px;
 }
-.draggable-mobile-heading__content {
+.draggable-bottom-heading__content {
   contain: layout;
   display: block;
   flex: 1 1 auto;
 }
-.draggable-mobile-heading,
-.draggable-mobile-heading__content {
+.draggable-bottom-heading,
+.draggable-bottom-heading__content {
   height: 48px;
 }
-.draggable-mobile-heading >>> .map-control-button {
+.draggable-bottom-heading >>> .map-control-button {
   background-color: unset;
 }
-.draggable-mobile-heading__title {
+.draggable-bottom-heading__title {
   font-size: 1.25rem;
   line-height: 1.5;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.draggable-mobile-content {
+.draggable-bottom-content {
   flex-grow: 1;
   overflow: auto;
 }

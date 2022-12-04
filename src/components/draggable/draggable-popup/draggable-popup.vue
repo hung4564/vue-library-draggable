@@ -1,7 +1,7 @@
 <template>
   <component
     v-bind:is="currentComponent"
-    :container_id="drag_id"
+    :containerId="containerId"
     v-bind="$attrs"
     class="draggable-popup"
     :show.sync="c_show"
@@ -25,7 +25,7 @@ import { isMobile } from "../store/store-draggable";
 export default {
   components: {
     DraggablePopupDesktop: () => import("./draggable-popup-desktop.vue"),
-    DraggableMobile: () => import("../draggable-mobile.vue")
+    DraggableBottom: () => import("../draggable-bottom.vue")
   },
   props: {
     show: Boolean,
@@ -35,7 +35,7 @@ export default {
     }
   },
   inject: {
-    drag_id: { default: "" }
+    containerId: { default: "" }
   },
   data: () => ({
     p_zIndex: 0,
@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     isMobile() {
-      return isMobile(this.drag_id);
+      return isMobile(this.containerId);
     },
     c_show: {
       get() {
@@ -66,7 +66,7 @@ export default {
       }
     },
     currentComponent() {
-      return this.isMobile ? "draggable-mobile" : "draggable-popup-desktop";
+      return this.isMobile ? "draggable-bottom" : "draggable-popup-desktop";
     }
   },
   methods: {}
