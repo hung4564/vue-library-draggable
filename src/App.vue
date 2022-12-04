@@ -26,7 +26,7 @@
         <div style="height: 100vh"></div>
       </DraggablePopup>
 
-      <DraggableSidebar title="siderbar 1" show>
+      <DraggableSidebar title="siderbar 1" show disabledExpand>
         <div style="height: 100vh"></div>
       </DraggableSidebar>
       <DraggableSidebar title="siderbar 2" show right>

@@ -1,11 +1,17 @@
 <template>
-  <i class="map-icon mdi" v-if="$slots.default" :class="$slots.default[0].text">
+  <i
+    class="map-icon"
+    v-if="icon || $slots.default"
+    :class="icon || $slots.default[0].text"
+  >
   </i>
 </template>
 
 <script>
 export default {
-  props: {},
+  props: {
+    icon: { type: String }
+  },
   computed: {}
 };
 </script>

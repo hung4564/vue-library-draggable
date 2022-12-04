@@ -8,12 +8,14 @@
 
 ## Props
 
-| Prop            | Description | Type      | Required | Default Value |
-| --------------- | ----------- | --------- | -------- | ------------- |
-| `show`          |             | `boolean` | `fasle`  | --            |
-| `title`         |             | `string`  | `fasle`  | --            |
-| `disabledClose` |             | `boolean` | `fasle`  | --            |
-| `containerId`   |             | `boolean` | `true`   | --            |
+| Prop             | Description | Type      | Required | Default Value |
+| ---------------- | ----------- | --------- | -------- | ------------- |
+| `show`           |             | `boolean` | `fasle`  | --            |
+| `title`          |             | `string`  | `fasle`  | --            |
+| `disabledClose`  |             | `boolean` | `fasle`  | --            |
+| `disabledHeader` |             | `boolean` | `fasle`  | --            |
+| `disabledOrder`  |             | `boolean` | `fasle`  | --            |
+| `containerId`    |             | `boolean` | `true`   | --            |
 
 ## Events
 

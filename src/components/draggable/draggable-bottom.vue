@@ -7,24 +7,27 @@
   >
     <map-card>
       <div class="draggable-bottom">
-        <div class="draggable-bottom-heading">
-          <div class="draggable-bottom-heading__title">
-            <slot name="title"></slot>
-          </div>
-          <div class="draggable-bottom-heading__content"> </div>
-          <div class="map-spacer"></div>
-          <slot name="extra-btn"></slot>
+        <template v-if="!disabledHeader">
+          <div class="draggable-bottom-heading">
+            <div class="draggable-bottom-heading__title">
+              <slot name="title"></slot>
+            </div>
+            <div class="draggable-bottom-heading__content"> </div>
+            <div class="map-spacer"></div>
+            <slot name="extra-btn"></slot>
 
-          <template v-if="countPopup > 1">
-            <map-button
-              :disabled="isFirst"
-              icon
-              small
-              @click.prevent.stop="onToBack()"
-            >
-              <map-icon>mdi-arrange-send-backward</map-icon>
-            </map-button>
-            <!-- <map-button
+            <template v-if="countPopup > 1 && !disabledOrder">
+              <map-button
+                :disabled="isFirst"
+                icon
+                small
+                @click.prevent.stop="onToBack()"
+              >
+                <map-icon>
+                  {{ ICON_CONFIG["action.to-back"] }}
+                </map-icon>
+              </map-button>
+              <!-- <map-button
               :disabled="isLast"
               icon
               small
@@ -32,19 +35,22 @@
             >
               <map-icon>mdi-arrange-bring-forward</map-icon>
             </map-button> -->
-          </template>
-          <map-button icon small @click="onFullScreen()">
-            <map-icon v-if="isFullScreen">
-              mdi-arrow-down-drop-circle-outline
-            </map-icon>
-            <map-icon v-else> mdi-arrow-up-drop-circle-outline </map-icon>
-          </map-button>
-          <map-button v-if="!disabledClose" icon small @click="onClose">
-            <map-icon>mdi-close</map-icon>
-          </map-button>
-        </div>
+            </template>
+            <map-button icon small @click="onFullScreen()">
+              <map-icon v-if="isFullScreen">
+                {{ ICON_CONFIG["action.on-fullscreen"] }}
+              </map-icon>
+              <map-icon v-else>
+                {{ ICON_CONFIG["action.off-fullscreen"] }}
+              </map-icon>
+            </map-button>
+            <map-button v-if="!disabledClose" icon small @click="onClose">
+              <map-icon>{{ ICON_CONFIG["action.close"] }}</map-icon>
+            </map-button>
+          </div>
 
-        <hr class="map-divider" />
+          <hr class="map-divider" />
+        </template>
         <div class="draggable-bottom-content">
           <slot></slot>
         </div>

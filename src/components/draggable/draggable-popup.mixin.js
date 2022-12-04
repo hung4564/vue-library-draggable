@@ -1,10 +1,14 @@
 import { checkIsFirst, checkIsLast } from "./store/store-draggable";
 
+import { ICON_CONFIG } from "./store/config";
+
 export default {
   props: {
     show: Boolean,
     containerId: { type: String, required: true },
     disabledClose: { type: Boolean, default: false },
+    disabledOrder: Boolean,
+    disabledHeader: Boolean,
     title: {
       type: String,
       default: ""
@@ -23,6 +27,9 @@ export default {
     }
   },
   computed: {
+    ICON_CONFIG() {
+      return ICON_CONFIG;
+    },
     c_show: {
       get() {
         return this.show;

@@ -22,36 +22,45 @@
   >
     <map-card :width="p_width" :height="p_height">
       <div class="draggable-popup-desktop">
-        <div class="draggable-popup-desktop-heading">
-          <div class="draggable-popup-desktop-heading__content">
-            <map-icon class="drag grabbing">mdi-drag-variant</map-icon>
-            <div class="draggable-popup-desktop-heading__title">
-              <slot name="title"></slot>
-            </div>
-            <div class="map-spacer"></div>
-            <slot name="extra-btn"></slot>
-            <template v-if="countPopup > 1">
-              <map-button :disabled="isFirst" icon small @click="onToBack()">
-                <map-icon small>mdi-arrange-send-backward</map-icon>
-              </map-button>
-              <map-button :disabled="isLast" icon small @click="onToFront()">
-                <map-icon small>mdi-arrange-bring-forward</map-icon>
-              </map-button>
-            </template>
+        <template v-if="!disabledHeader">
+          <div class="draggable-popup-desktop-heading">
+            <div class="draggable-popup-desktop-heading__content">
+              <map-icon class="drag grabbing">
+                {{ ICON_CONFIG["action.drag"] }}
+              </map-icon>
+              <div class="draggable-popup-desktop-heading__title">
+                <slot name="title"></slot>
+              </div>
+              <div class="map-spacer"></div>
+              <slot name="extra-btn"></slot>
+              <template v-if="countPopup > 1 && !disabledOrder">
+                <map-button :disabled="isFirst" @click="onToBack()">
+                  <map-icon> {{ ICON_CONFIG["action.to-back"] }} </map-icon>
+                </map-button>
+                <map-button :disabled="isLast" @click="onToFront()">
+                  <map-icon>
+                    {{ ICON_CONFIG["action.to-front"] }}
+                  </map-icon>
+                </map-button>
+              </template>
 
-            <map-button icon small @click="toggleExpanded">
-              <map-icon small>{{
-                isExpanded
-                  ? "mdi-arrow-up-drop-circle-outline"
-                  : "mdi-arrow-down-drop-circle-outline"
-              }}</map-icon>
-            </map-button>
-            <map-button v-if="!disabledClose" icon small @click="onClose">
-              <map-icon small>mdi-close</map-icon>
-            </map-button>
+              <map-button @click="toggleExpanded">
+                <map-icon
+                  :icon="
+                    isExpanded
+                      ? ICON_CONFIG['action.expanded']
+                      : ICON_CONFIG['action.close-expanded']
+                  "
+                >
+                </map-icon>
+              </map-button>
+              <map-button v-if="!disabledClose" @click="onClose">
+                <map-icon>{{ ICON_CONFIG["action.close"] }} </map-icon>
+              </map-button>
+            </div>
           </div>
-        </div>
-        <hr class="map-divider" />
+          <hr class="map-divider" />
+        </template>
         <div v-show="isExpanded" class="draggable-popup-desktop-content">
           <slot></slot>
         </div>

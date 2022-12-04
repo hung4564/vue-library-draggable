@@ -1,47 +1,80 @@
 <template>
-  <side-bar
-    :right="right"
-    :show.sync="c_show"
+  <div
+    class="sidebar-container"
+    v-show="c_show"
+    :class="{
+      expand: c_expand,
+      'left-sidebar-container': left,
+      'right-sidebar-container': right,
+      'auto-sidebar-container': isAutoWidth
+    }"
     :style="{
       zIndex: p_zIndex
     }"
   >
-    <map-card width="100%" height="100%">
-      <div class="draggable-sidebar">
-        <div class="draggable-sidebar-heading">
-          <div class="draggable-sidebar-heading__content">
-            <div class="draggable-sidebar-heading__title">
-              <slot name="title">
-                {{ title }}
-              </slot>
-            </div>
-            <div class="map-spacer"></div>
-            <slot name="extra-btn"></slot>
+    <div class="sidebar-container--content">
+      <map-card width="100%" height="100%">
+        <div class="draggable-sidebar">
+          <template v-if="!disabledHeader">
+            <div class="draggable-sidebar-heading">
+              <div class="draggable-sidebar-heading__content">
+                <div class="draggable-sidebar-heading__title">
+                  <slot name="title">
+                    {{ title }}
+                  </slot>
+                </div>
+                <div class="map-spacer"></div>
+                <slot name="extra-btn"></slot>
 
-            <template v-if="countPopup > 1">
-              <map-button :disabled="isFirst" icon small @click="onToBack()">
-                <map-icon small>mdi-arrange-send-backward</map-icon>
-              </map-button>
-            </template>
-            <map-button v-if="!disabledClose" icon small @click="onClose">
-              <map-icon small>mdi-close</map-icon>
-            </map-button>
+                <template v-if="countPopup > 1 && !disabledOrder">
+                  <map-button :disabled="isFirst" @click="onToBack()">
+                    <map-icon small>
+                      {{ ICON_CONFIG["action.to-back"] }}</map-icon
+                    >
+                  </map-button>
+                </template>
+                <map-button v-if="!disabledClose" @click="onClose">
+                  <map-icon>{{ ICON_CONFIG["action.close"] }}</map-icon>
+                </map-button>
+              </div>
+            </div>
+            <hr class="map-divider" />
+          </template>
+          <div class="draggable-sidebar-content">
+            <slot></slot>
           </div>
         </div>
-        <hr class="map-divider" />
-        <div class="draggable-sidebar-content">
-          <slot></slot>
-        </div>
-      </div>
-    </map-card>
-  </side-bar>
+      </map-card>
+    </div>
+    <div v-if="c_show && !disabledExpand" class="complex-button-close">
+      <button @click="onToggleExpand">
+        <span v-if="left">
+          <map-icon
+            :icon="
+              c_expand
+                ? ICON_CONFIG['action.sidebar-left-expanded']
+                : ICON_CONFIG['action.sidebar-left-close-expanded']
+            "
+          ></map-icon>
+        </span>
+        <span v-else-if="right">
+          <map-icon
+            :icon="
+              c_expand
+                ? ICON_CONFIG['action.sidebar-right-expanded']
+                : ICON_CONFIG['action.sidebar-right-close-expanded']
+            "
+          ></map-icon>
+        </span>
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
 import MapButton from "../../MapButton.vue";
 import MapCard from "../../MapCard.vue";
 import MapIcon from "../../MapIcon.vue";
-import SideBar from "./map-sidebar.vue";
 import ModuleMixin from "../draggable-popup.mixin";
 import { getUUIDv4 } from "@/utils";
 import {
@@ -54,7 +87,7 @@ import {
 import { getSidebarIdsShow } from "../store/store-draggable";
 export default {
   mixins: [ModuleMixin],
-  components: { MapCard, MapIcon, SideBar, MapButton },
+  components: { MapCard, MapIcon, MapButton },
   props: {
     show: Boolean,
     title: {
@@ -62,13 +95,12 @@ export default {
       default: ""
     },
     right: Boolean,
-    disabledClose: { type: Boolean, default: false }
+    disabledExpand: Boolean
   },
   data: () => ({
     drag_id: `sidebar-${getUUIDv4()}`,
     p_show: false,
-    is_first: false,
-    count: 0
+    p_expand: true
   }),
   watch: {
     show: {
@@ -89,6 +121,21 @@ export default {
     unRegister(this.containerId, this.drag_id);
   },
   computed: {
+    isAutoWidth() {
+      return !this.width || this.width == "auto";
+    },
+    left() {
+      return !this.right;
+    },
+    c_expand: {
+      get() {
+        return this.p_expand;
+      },
+      set(value) {
+        this.p_expand = value;
+        this.$emit("update:expand", value);
+      }
+    },
     position() {
       return this.right ? "right" : "left";
     },
@@ -123,6 +170,9 @@ export default {
     },
     onToFront() {
       setToFront(this.containerId, this.drag_id);
+    },
+    onToggleExpand() {
+      this.c_expand = !this.c_expand;
     }
   }
 };
@@ -177,5 +227,126 @@ export default {
 .draggable-sidebar-content {
   flex-grow: 1;
   overflow: auto;
+}
+</style>
+
+<style scoped lang="scss">
+.sidebar-container {
+  position: absolute;
+  pointer-events: all;
+  z-index: 900;
+  top: 0;
+  height: 100%;
+  transition: max-width 1s;
+}
+.sidebar-container > .sidebar-container--content {
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+.sidebar-container.expand > .sidebar-container--content {
+  display: block;
+}
+.sidebar-container {
+  transition: all 0.2s ease;
+}
+.complex-buton-close {
+  position: absolute;
+  top: 50%;
+}
+.left-sidebar-container {
+  left: 0;
+}
+.right-sidebar-container {
+  right: 0;
+}
+.sidebar-container {
+  width: 0;
+}
+.complex-button-close > button {
+  height: 48px;
+  width: 23px;
+  display: flex;
+  background-color: rgba(32, 43, 54, 0.9);
+  color: white;
+  align-items: center;
+  border-radius: 0px;
+  border: none;
+}
+.complex-button-close > button:focus:not(:focus-visible) {
+  outline: 0;
+}
+</style>
+
+<style scoped lang="scss">
+@media only screen and (max-width: 600px) {
+  .auto-sidebar-container {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 1264px) {
+  .auto-sidebar-container.expand {
+    width: 320px;
+  }
+  .auto-sidebar-container.expand.left-sidebar-container .complex-button-close {
+    left: 320px !important;
+  }
+  .auto-sidebar-container.expand.right-sidebar-container .complex-button-close {
+    right: 320px !important;
+  }
+}
+@media only screen and (min-width: 1264px) {
+  .auto-sidebar-container.expand {
+    width: 400px;
+  }
+  .auto-sidebar-container.expand.left-sidebar-container .complex-button-close {
+    left: 400px !important;
+  }
+  .auto-sidebar-container.expand.right-sidebar-container .complex-button-close {
+    right: 400px !important;
+  }
+}
+.sidebar-container {
+  position: absolute;
+  pointer-events: all;
+  z-index: 900;
+  top: 0;
+  transition: max-width 1s;
+}
+
+.sidebar-container {
+  transition: all 0.2s ease;
+}
+.complex-button-close {
+  position: absolute;
+  top: 50%;
+  transition: max-width 1s;
+  transition: all 0.2s ease;
+}
+.left-sidebar-container {
+  left: 0;
+}
+.right-sidebar-container {
+  right: 0;
+}
+.sidebar-container {
+  width: 0;
+}
+</style>
+
+<style lang="scss" scoped>
+.sidebar-container {
+  &.left-sidebar-container {
+    .complex-button-close {
+      left: 0;
+      transform: translateY(-50%);
+    }
+  }
+  &.right-sidebar-container {
+    .complex-button-close {
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
 }
 </style>
