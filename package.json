@@ -17,8 +17,10 @@
   "license": "MIT",
   "version": "0.0.7",
   "files": [
-    "dist/*"
+    "dist/*",
+    "types/*"
   ],
+  "types": "./types/index.d.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name draggable src/index.js",
