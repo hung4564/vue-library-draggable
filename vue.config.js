@@ -1,5 +1,9 @@
 const path = require("path");
 module.exports = {
+  css: {
+    extract: false
+  },
+
   transpileDependencies: true,
   configureWebpack: {
     resolve: {

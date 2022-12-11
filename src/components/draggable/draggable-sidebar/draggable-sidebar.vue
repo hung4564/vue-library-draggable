@@ -23,11 +23,13 @@
 </template>
 
 <script>
+import DraggableSidebarDesktop from "./draggable-sidebar-desktop.vue";
+import DraggableBottom from "../draggable-bottom.vue";
 import { isMobile } from "../store/store-draggable";
 export default {
   components: {
-    DraggableSidebarDesktop: () => import("./draggable-sidebar-desktop.vue"),
-    DraggableBottom: () => import("../draggable-bottom.vue")
+    DraggableSidebarDesktop,
+    DraggableBottom
   },
   props: {
     show: Boolean,

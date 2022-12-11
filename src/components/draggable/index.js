@@ -1,5 +1,4 @@
-const DraggablePopup = () => import("./draggable-popup/draggable-popup.vue");
-const DraggableContianer = () => import("./draggable-contianer.vue");
-const DraggableSidebar = () =>
-  import("./draggable-sidebar/draggable-sidebar.vue");
-export { DraggablePopup, DraggableContianer, DraggableSidebar };
+export { default as DraggableContianer } from "./draggable-contianer.vue";
+export { default as DraggablePopup } from "./draggable-popup/draggable-popup.vue";
+export { default as DraggableSidebar } from "./draggable-sidebar/draggable-sidebar.vue";
+export { default as DraggableBottom } from "./draggable-bottom.vue";
