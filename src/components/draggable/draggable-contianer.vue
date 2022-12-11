@@ -49,6 +49,7 @@ export default {
       this.onResize();
       window.addEventListener("resize", this.onResize);
       this.init_done = true;
+      this.$emit("init-done", { id: this.container_id });
     });
     this.onUpdateCardComponent();
   },

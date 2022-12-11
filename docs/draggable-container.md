@@ -15,8 +15,9 @@
 
 ## Events
 
-| Name | Description |
-| ---- | ----------- |
+| Name      | Description |
+| --------- | ----------- |
+| init-done | {id:String} |
 
 ## Slots
 
