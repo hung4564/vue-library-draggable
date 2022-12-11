@@ -93,7 +93,7 @@ module.exports = require("vue");
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.miniCssF = function(chunkId) {
 /******/ 			// return url for filenames based on template
-/******/ 			return "css/" + chunkId + "." + {"47":"6ce2050e","145":"311c0201","256":"1d0d43b3","516":"76b97d14","593":"f6c6d828","768":"76b97d14"}[chunkId] + ".css";
+/******/ 			return "css/" + chunkId + "." + {"150":"699014a7","427":"e8862410","516":"76b97d14","768":"76b97d14","868":"ae3cbc80","878":"d84dadfa"}[chunkId] + ".css";
 /******/ 		};
 /******/ 	}();
 /******/ 	
@@ -242,7 +242,7 @@ module.exports = require("vue");
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.miniCss = function(chunkId, promises) {
-/******/ 			var cssChunks = {"47":1,"145":1,"256":1,"516":1,"593":1,"768":1};
+/******/ 			var cssChunks = {"150":1,"427":1,"516":1,"768":1,"868":1,"878":1};
 /******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(function() {
@@ -383,7 +383,7 @@ if (typeof window !== 'undefined') {
 ;// CONCATENATED MODULE: ./src/components/draggable/index.js
 const DraggablePopup = () => __webpack_require__.e(/* import() */ 768).then(__webpack_require__.bind(__webpack_require__, 7768));
 
-const DraggableContianer = () => Promise.all(/* import() */[__webpack_require__.e(945), __webpack_require__.e(446), __webpack_require__.e(593)]).then(__webpack_require__.bind(__webpack_require__, 2593));
+const DraggableContianer = () => Promise.all(/* import() */[__webpack_require__.e(945), __webpack_require__.e(446), __webpack_require__.e(868)]).then(__webpack_require__.bind(__webpack_require__, 3868));
 
 const DraggableSidebar = () => __webpack_require__.e(/* import() */ 516).then(__webpack_require__.bind(__webpack_require__, 1516));
 
@@ -391,7 +391,6 @@ const DraggableSidebar = () => __webpack_require__.e(/* import() */ 516).then(__
 ;// CONCATENATED MODULE: ./src/components/index.js
 
 ;// CONCATENATED MODULE: ./src/index.js
-
 
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js
 

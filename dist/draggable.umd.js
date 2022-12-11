@@ -103,7 +103,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__7203__;
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.miniCssF = function(chunkId) {
 /******/ 			// return url for filenames based on template
-/******/ 			return "css/" + chunkId + "." + {"201":"f6c6d828","203":"1d0d43b3","350":"6ce2050e","385":"76b97d14","526":"76b97d14","925":"311c0201"}[chunkId] + ".css";
+/******/ 			return "css/" + chunkId + "." + {"385":"76b97d14","526":"76b97d14","549":"699014a7","780":"e8862410","909":"ae3cbc80","913":"d84dadfa"}[chunkId] + ".css";
 /******/ 		};
 /******/ 	}();
 /******/ 	
@@ -252,7 +252,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__7203__;
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.miniCss = function(chunkId, promises) {
-/******/ 			var cssChunks = {"201":1,"203":1,"350":1,"385":1,"526":1,"925":1};
+/******/ 			var cssChunks = {"385":1,"526":1,"549":1,"780":1,"909":1,"913":1};
 /******/ 			if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 			else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 				promises.push(installedCssChunks[chunkId] = loadStylesheet(chunkId).then(function() {
@@ -393,7 +393,7 @@ if (typeof window !== 'undefined') {
 ;// CONCATENATED MODULE: ./src/components/draggable/index.js
 const DraggablePopup = () => __webpack_require__.e(/* import() */ 526).then(__webpack_require__.bind(__webpack_require__, 6526));
 
-const DraggableContianer = () => Promise.all(/* import() */[__webpack_require__.e(945), __webpack_require__.e(220), __webpack_require__.e(201)]).then(__webpack_require__.bind(__webpack_require__, 8201));
+const DraggableContianer = () => Promise.all(/* import() */[__webpack_require__.e(945), __webpack_require__.e(220), __webpack_require__.e(909)]).then(__webpack_require__.bind(__webpack_require__, 8909));
 
 const DraggableSidebar = () => __webpack_require__.e(/* import() */ 385).then(__webpack_require__.bind(__webpack_require__, 3385));
 
@@ -401,7 +401,6 @@ const DraggableSidebar = () => __webpack_require__.e(/* import() */ 385).then(__
 ;// CONCATENATED MODULE: ./src/components/index.js
 
 ;// CONCATENATED MODULE: ./src/index.js
-
 
 ;// CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js
 

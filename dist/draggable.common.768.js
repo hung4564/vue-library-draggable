@@ -62,8 +62,8 @@ var store_draggable = __webpack_require__(8863);
 
 /* harmony default export */ var draggable_popupvue_type_script_lang_js_ = ({
   components: {
-    DraggablePopupDesktop: () => Promise.all(/* import() */[__webpack_require__.e(945), __webpack_require__.e(223), __webpack_require__.e(145)]).then(__webpack_require__.bind(__webpack_require__, 145)),
-    DraggableBottom: () => Promise.all(/* import() */[__webpack_require__.e(945), __webpack_require__.e(47)]).then(__webpack_require__.bind(__webpack_require__, 8047))
+    DraggablePopupDesktop: () => Promise.all(/* import() */[__webpack_require__.e(945), __webpack_require__.e(223), __webpack_require__.e(150)]).then(__webpack_require__.bind(__webpack_require__, 9150)),
+    DraggableBottom: () => Promise.all(/* import() */[__webpack_require__.e(945), __webpack_require__.e(878)]).then(__webpack_require__.bind(__webpack_require__, 6878))
   },
   props: {
     show: Boolean,
@@ -271,12 +271,16 @@ const ACTION_CACHE = {};
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "$X": function() { return /* binding */ getCardBottomComponent; },
+/* harmony export */   "Du": function() { return /* binding */ getCardPopupComponent; },
 /* harmony export */   "Ep": function() { return /* binding */ getStoreDraggable; },
 /* harmony export */   "UC": function() { return /* binding */ setParentProps; },
+/* harmony export */   "_L": function() { return /* binding */ getCardSidebarComponent; },
 /* harmony export */   "b6": function() { return /* binding */ getParentHeight; },
 /* harmony export */   "d6": function() { return /* binding */ setDraggableContainer; },
 /* harmony export */   "ki": function() { return /* binding */ removeDraggableContainer; },
 /* harmony export */   "oX": function() { return /* binding */ getParentWidth; },
+/* harmony export */   "rg": function() { return /* binding */ setCardComponent; },
 /* harmony export */   "tq": function() { return /* binding */ isMobile; }
 /* harmony export */ });
 /* unused harmony exports getParentProps, setIsMobile */
@@ -299,7 +303,11 @@ const setDraggableContainer = id => {
       width: 0,
       height: 0
     },
-    isMobile: false
+    isMobile: false,
+    cardComponent: "map-card",
+    cardPopupComponent: "map-card",
+    cardSidebarComponent: "map-card",
+    cardBottomComponent: "map-card"
   });
 };
 const removeDraggableContainer = id => {
@@ -323,6 +331,30 @@ const isMobile = id => getStoreDraggable(id).isMobile;
 const setIsMobile = (id, value) => {
   getStoreDraggable(id).isMobile = value;
 };
+const setCardComponent = (id, {
+  cardComponent,
+  cardPopupComponent,
+  cardSidebarComponent,
+  cardBottomComponent
+}) => {
+  let store = getStoreDraggable(id);
+  store.cardComponent = cardComponent;
+  store.cardPopupComponent = cardPopupComponent;
+  store.cardSidebarComponent = cardSidebarComponent;
+  store.cardBottomComponent = cardBottomComponent;
+};
+const getCardPopupComponent = id => {
+  let store = getStoreDraggable(id);
+  return store.cardPopupComponent || store.cardComponent;
+};
+const getCardSidebarComponent = id => {
+  let store = getStoreDraggable(id);
+  return store.cardSidebarComponent || store.cardComponent;
+};
+const getCardBottomComponent = id => {
+  let store = getStoreDraggable(id);
+  return store.cardBottomComponent || store.cardComponent;
+};
 
 /***/ }),
 
@@ -330,8 +362,11 @@ const setIsMobile = (id, value) => {
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "$X": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.$X; },
+/* harmony export */   "Du": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.Du; },
 /* harmony export */   "Ep": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.Ep; },
 /* harmony export */   "UC": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.UC; },
+/* harmony export */   "_L": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__._L; },
 /* harmony export */   "b6": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.b6; },
 /* harmony export */   "ch": function() { return /* binding */ getMobileIdsShow; },
 /* harmony export */   "d6": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.d6; },
@@ -341,6 +376,7 @@ const setIsMobile = (id, value) => {
 /* harmony export */   "ki": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.ki; },
 /* harmony export */   "oX": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.oX; },
 /* harmony export */   "op": function() { return /* binding */ checkIsFirst; },
+/* harmony export */   "rg": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.rg; },
 /* harmony export */   "tq": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_0__.tq; }
 /* harmony export */ });
 /* harmony import */ var _container__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4839);
