@@ -1,8 +1,15 @@
 {
   "main": "./dist/draggable.common.js",
-  "name": "vue-libary-draggable",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@hungpv/vue-libary-draggable",
+  "author": "hung.pv <hung1100001@gmail.com>",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hung4564/vue-libary-draggable"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name draggable src/index.js",
