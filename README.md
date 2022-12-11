@@ -40,8 +40,7 @@ import {
   DraggableContianer,
   DraggablePopup,
   DraggableSidebar
-} from "@components/draggable";
-/* eslint-disable no-unused-vars */
+} from "@hungpv4564/vue-libary-draggable";
 export default {
   name: "App",
   components: { DraggableContianer, DraggablePopup, DraggableSidebar }
