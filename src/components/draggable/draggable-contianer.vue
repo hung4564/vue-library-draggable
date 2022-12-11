@@ -11,9 +11,16 @@ import {
   removeDraggableContainer,
   setDraggableContainer,
   setParentProps,
-  getStoreDraggable
+  getStoreDraggable,
+  setCardComponent
 } from "./store/store-draggable";
 export default {
+  props: {
+    cardComponent: { type: String, default: "map-card" },
+    cardPopupComponent: { type: String },
+    cardSidebarComponent: { type: String },
+    cardBottomComponent: { type: String }
+  },
   directives: {
     resize
   },
@@ -22,6 +29,20 @@ export default {
     container_id: `draggable-container-${getUUIDv4()}`,
     init_done: false
   }),
+  watch: {
+    cardComponent() {
+      this.onUpdateCardComponent();
+    },
+    cardPopupComponent() {
+      this.onUpdateCardComponent();
+    },
+    cardSidebarComponent() {
+      this.onUpdateCardComponent();
+    },
+    cardBottomComponent() {
+      this.onUpdateCardComponent();
+    }
+  },
   mounted() {
     setDraggableContainer(this.container_id);
     this.$nextTick(() => {
@@ -29,6 +50,7 @@ export default {
       window.addEventListener("resize", this.onResize);
       this.init_done = true;
     });
+    this.onUpdateCardComponent();
   },
   beforeDestroy() {
     removeDraggableContainer(this.container_id);
@@ -46,6 +68,14 @@ export default {
     };
   },
   methods: {
+    onUpdateCardComponent() {
+      setCardComponent(this.container_id, {
+        cardComponent: this.cardComponent,
+        cardPopupComponent: this.cardPopupComponent,
+        cardSidebarComponent: this.cardBottomComponent,
+        cardBottomComponent: this.cardBottomComponent
+      });
+    },
     onResize() {
       setParentProps(this.container_id, {
         width: this.$el.clientWidth,

@@ -13,7 +13,7 @@
     }"
   >
     <div class="sidebar-container--content">
-      <map-card width="100%" height="100%">
+      <component :is="componentName" width="100%" height="100%">
         <div class="draggable-sidebar">
           <template v-if="!disabledHeader">
             <div class="draggable-sidebar-heading">
@@ -44,7 +44,7 @@
             <slot></slot>
           </div>
         </div>
-      </map-card>
+      </component>
     </div>
     <div v-if="c_show && !disabledExpand" class="complex-button-close">
       <button @click="onToggleExpand">
@@ -84,7 +84,10 @@ import {
   setToBack,
   setToFront
 } from "../store/sidebar";
-import { getSidebarIdsShow } from "../store/store-draggable";
+import {
+  getCardSidebarComponent,
+  getSidebarIdsShow
+} from "../store/store-draggable";
 export default {
   mixins: [ModuleMixin],
   components: { MapCard, MapIcon, MapButton },
@@ -121,6 +124,13 @@ export default {
     unRegister(this.containerId, this.drag_id);
   },
   computed: {
+    componentName() {
+      return (
+        this.cardComponent ||
+        getCardSidebarComponent(this.containerId) ||
+        "map-card"
+      );
+    },
     isAutoWidth() {
       return !this.width || this.width == "auto";
     },

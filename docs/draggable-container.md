@@ -6,8 +6,12 @@
 
 ## Props
 
-| Prop | Description | Type | Required | Default Value |
-| ---- | ----------- | ---- | -------- | ------------- |
+| Prop                   | Description | Type     | Required | Default Value |
+| ---------------------- | ----------- | -------- | -------- | ------------- |
+| `cardComponent`        |             | `string` | `fasle`  | `map-card`    |
+| `cardPopupComponent`   |             | `string` | `fasle`  | --            |
+| `cardSidebarComponent` |             | `string` | `fasle`  | --            |
+| `cardBottomComponent`  |             | `string` | `fasle`  | --            |
 
 ## Events
 

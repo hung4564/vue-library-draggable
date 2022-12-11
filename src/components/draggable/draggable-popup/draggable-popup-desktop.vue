@@ -20,7 +20,7 @@
     @activated="activateEv()"
     @deactivated="deactivateEv()"
   >
-    <map-card :width="p_width" :height="p_height">
+    <component :is="componentName" :width="p_width" :height="p_height">
       <div class="draggable-popup-desktop">
         <template v-if="!disabledHeader">
           <div class="draggable-popup-desktop-heading">
@@ -65,7 +65,7 @@
           <slot></slot>
         </div>
       </div>
-    </map-card>
+    </component>
   </vue-drag-resize>
 </template>
 
@@ -77,6 +77,7 @@ import VueDragResize from "vue-drag-resize";
 import { isNil } from "lodash";
 import ModuleMixin from "../draggable-popup.mixin";
 import {
+  getCardPopupComponent,
   getParentHeight,
   getParentWidth,
   getPopupIdsShow
@@ -160,6 +161,13 @@ export default {
     }
   },
   computed: {
+    componentName() {
+      return (
+        this.cardComponent ||
+        getCardPopupComponent(this.containerId) ||
+        "map-card"
+      );
+    },
     c_popupIds() {
       return getPopupIdsShow(this.containerId);
     },

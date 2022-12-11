@@ -13,7 +13,11 @@ export const setDraggableContainer = (id) => {
     mobile_ids: [],
     mobile_ids_show: [],
     parent: { width: 0, height: 0 },
-    isMobile: false
+    isMobile: false,
+    cardComponent: "map-card",
+    cardPopupComponent: "map-card",
+    cardSidebarComponent: "map-card",
+    cardBottomComponent: "map-card"
   });
 };
 export const removeDraggableContainer = (id) => {
@@ -36,4 +40,33 @@ export const setParentProps = (id, { width, height }) => {
 export const isMobile = (id) => getStoreDraggable(id).isMobile;
 export const setIsMobile = (id, value) => {
   getStoreDraggable(id).isMobile = value;
+};
+export const setCardComponent = (
+  id,
+  {
+    cardComponent,
+    cardPopupComponent,
+    cardSidebarComponent,
+    cardBottomComponent
+  }
+) => {
+  let store = getStoreDraggable(id);
+  store.cardComponent = cardComponent;
+  store.cardPopupComponent = cardPopupComponent;
+  store.cardSidebarComponent = cardSidebarComponent;
+  store.cardBottomComponent = cardBottomComponent;
+};
+export const getCardPopupComponent = (id) => {
+  let store = getStoreDraggable(id);
+  return store.cardPopupComponent || store.cardComponent;
+};
+
+export const getCardSidebarComponent = (id) => {
+  let store = getStoreDraggable(id);
+  return store.cardSidebarComponent || store.cardComponent;
+};
+
+export const getCardBottomComponent = (id) => {
+  let store = getStoreDraggable(id);
+  return store.cardBottomComponent || store.cardComponent;
 };

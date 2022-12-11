@@ -12,7 +12,8 @@ export default {
     title: {
       type: String,
       default: ""
-    }
+    },
+    cardComponent: { type: String }
   },
   inject: [],
   data: () => ({ isLast: false, isFirst: false, p_zIndex: 0 }),

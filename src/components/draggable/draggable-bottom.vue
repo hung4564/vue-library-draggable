@@ -5,7 +5,7 @@
     :class="{ 'full-height': isFullScreen }"
     :style="{ zIndex: p_zIndex, height: isFullScreen ? '100%' : '45%' }"
   >
-    <map-card>
+    <component :is="componentName">
       <div class="draggable-bottom">
         <template v-if="!disabledHeader">
           <div class="draggable-bottom-heading">
@@ -55,7 +55,7 @@
           <slot></slot>
         </div>
       </div>
-    </map-card>
+    </component>
   </div>
 </template>
 
@@ -64,7 +64,10 @@ import MapCard from "../MapCard.vue";
 import MapIcon from "../MapIcon.vue";
 import MapButton from "../MapButton.vue";
 import ModuleMixin from "./draggable-popup.mixin";
-import { getMobileIdsShow } from "./store/store-draggable";
+import {
+  getCardBottomComponent,
+  getMobileIdsShow
+} from "./store/store-draggable";
 import {
   register,
   registerShow,
@@ -92,6 +95,13 @@ export default {
   },
   watch: {},
   computed: {
+    componentName() {
+      return (
+        this.cardComponent ||
+        getCardBottomComponent(this.containerId) ||
+        "map-card"
+      );
+    },
     c_show: {
       get() {
         return this.p_show;
