@@ -2,6 +2,16 @@
 
 # Vue libary draggable
 
+## Install
+
+```
+npm i @hungpv4564/vue-libary-draggable
+```
+
+```
+yarn @hungpv4564/vue-libary-draggable
+```
+
 ## Usage
 
 ```vue
