@@ -15,7 +15,7 @@
   },
   "bugs": "https://github.com/hung4564/vue-libary-draggable/issues",
   "license": "MIT",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name draggable src/index.js",
