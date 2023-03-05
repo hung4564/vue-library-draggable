@@ -15,7 +15,7 @@
   },
   "bugs": "https://github.com/hung4564/vue-library-draggable/issues",
   "license": "MIT",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "files": [
     "dist/*",
     "types/*"
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
-    "@vue/runtime-dom": "^3.2.37",
+    "@vue/runtime-dom": "3.2.37",
     "core-js": "^3.8.3",
     "minify-css-string": "^1.0.0",
     "sass": "^1.53.0",
