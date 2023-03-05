@@ -40,7 +40,7 @@ import {
   DraggableContianer,
   DraggablePopup,
   DraggableSidebar
-} from "@hungpv4564/vue-libraryy-draggable";
+} from "@hungpv4564/vue-library-draggable";
 export default {
   name: "App",
   components: { DraggableContianer, DraggablePopup, DraggableSidebar }
