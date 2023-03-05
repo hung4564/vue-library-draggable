@@ -1,19 +1,19 @@
 {
   "main": "./dist/draggable.common.js",
-  "name": "@hungpv4564/vue-libary-draggable",
+  "name": "@hungpv4564/vue-library-draggable",
   "author": {
     "name": "hung.pv"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hung4564/vue-libary-draggable"
+    "url": "https://github.com/hung4564/vue-library-draggable"
   },
   "private": false,
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "bugs": "https://github.com/hung4564/vue-libary-draggable/issues",
+  "bugs": "https://github.com/hung4564/vue-library-draggable/issues",
   "license": "MIT",
   "version": "0.0.7",
   "files": [

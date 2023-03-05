@@ -1,6 +1,6 @@
-<h1 align="center">Vue library draggable</h1>
+<h1 align="center">Vue libraryy draggable</h1>
 
-# Vue library draggable
+# Vue libraryy draggable
 
 ## Install
 
@@ -9,7 +9,7 @@ npm i @hungpv4564/vue-library-draggable
 ```
 
 ```
-yarn @hungpv4564/vue-library-draggable
+yarn add @hungpv4564/vue-library-draggable
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ import {
   DraggableContianer,
   DraggablePopup,
   DraggableSidebar
-} from "@hungpv4564/vue-library-draggable";
+} from "@hungpv4564/vue-libraryy-draggable";
 export default {
   name: "App",
   components: { DraggableContianer, DraggablePopup, DraggableSidebar }
