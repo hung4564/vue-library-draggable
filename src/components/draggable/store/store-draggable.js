@@ -1,6 +1,6 @@
 import { getStoreDraggable, isMobile } from "./container";
 
-import { ACTION_CACHE } from "./cache";
+import { getFunctionActionCache } from "./cache";
 
 export * from "./container";
 
@@ -28,12 +28,10 @@ export const getSidebarIdsShow = (id, position) => {
   if (isMobile(id)) {
     return p_store.mobie_ids;
   }
-  return p_store.sidebar_ids_show.filter(
-    (sidebar_id) =>
-      ACTION_CACHE[id] &&
-      ACTION_CACHE[id][sidebar_id] &&
-      ACTION_CACHE[id][sidebar_id]["position"] == position
-  );
+  return p_store.sidebar_ids_show.filter((sidebar_id) => {
+    let action = getFunctionActionCache(id, sidebar_id);
+    action && action && action["position"] == position;
+  });
 };
 
 export const getMobileIdsShow = (id) => {

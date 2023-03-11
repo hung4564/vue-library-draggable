@@ -1,4 +1,9 @@
-import { ACTION_CACHE } from "./cache";
+import {
+  getFunctionActionCache,
+  removeFunctionActionCache,
+  setFunctionActionCache
+} from "./cache";
+
 import { getStoreDraggable } from "./container";
 
 const register = (id, mobile_id, { setIndex }) => {
@@ -7,15 +12,11 @@ const register = (id, mobile_id, { setIndex }) => {
   if (!p_store.mobile_ids.includes(mobile_id)) {
     p_store.mobile_ids.push(mobile_id);
   }
-  if (!ACTION_CACHE[id]) {
-    ACTION_CACHE[id] = {};
-  }
-  ACTION_CACHE[id][mobile_id] = { setIndex };
+  setFunctionActionCache(id, mobile_id, { setIndex });
 };
 const unRegister = (id, mobile_id) => {
   if (!id || !mobile_id) return;
-  if (ACTION_CACHE[id] && ACTION_CACHE[id][mobile_id])
-    ACTION_CACHE[id][mobile_id] = undefined;
+  removeFunctionActionCache(id, mobile_id);
   let p_store = getStoreDraggable(id);
   if (!p_store || !p_store.mobile_ids) return;
   p_store.mobile_ids = p_store.mobile_ids.filter((x) => x != id);
@@ -44,8 +45,8 @@ const updateAllIndex = (id) => {
   if (!id) return;
   let p_store = getStoreDraggable(id);
   p_store.mobile_ids_show.forEach((mobile_id, index) => {
-    if (ACTION_CACHE[id][mobile_id])
-      ACTION_CACHE[id][mobile_id].setIndex(index < 0 ? 1 : index + 2);
+    let action = getFunctionActionCache(id, mobile_id);
+    if (action) action.setIndex(index < 0 ? 1 : index + 2);
   });
 };
 

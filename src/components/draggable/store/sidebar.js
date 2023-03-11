@@ -1,4 +1,9 @@
-import { ACTION_CACHE } from "./cache";
+import {
+  getFunctionActionCache,
+  removeFunctionActionCache,
+  setFunctionActionCache
+} from "./cache";
+
 import { getStoreDraggable } from "./container";
 
 const register = (id, sidebar_id, { setIndex, position }) => {
@@ -7,15 +12,11 @@ const register = (id, sidebar_id, { setIndex, position }) => {
   if (!p_store.sidebar_ids.includes(sidebar_id)) {
     p_store.sidebar_ids.push(sidebar_id);
   }
-  if (!ACTION_CACHE[id]) {
-    ACTION_CACHE[id] = {};
-  }
-  ACTION_CACHE[id][sidebar_id] = { setIndex, position };
+  setFunctionActionCache(id, sidebar_id, { setIndex, position });
 };
 const unRegister = (id, sidebar_id) => {
   if (!id || !sidebar_id) return;
-  if (ACTION_CACHE[id] && ACTION_CACHE[id][sidebar_id])
-    ACTION_CACHE[id][sidebar_id] = undefined;
+  removeFunctionActionCache(id, sidebar_id);
   let p_store = getStoreDraggable(id);
   if (!p_store || !p_store.sidebar_ids) return;
   p_store.sidebar_ids = p_store.sidebar_ids.filter((x) => x != id);
@@ -44,8 +45,8 @@ const updateAllIndex = (id) => {
   if (!id) return;
   let p_store = getStoreDraggable(id);
   p_store.sidebar_ids_show.forEach((sidebar_id, index) => {
-    if (ACTION_CACHE[id][sidebar_id])
-      ACTION_CACHE[id][sidebar_id].setIndex(index < 0 ? 1 : index + 2);
+    let action = getFunctionActionCache(id, sidebar_id);
+    if (action) action.setIndex(index < 0 ? 1 : index + 2);
   });
 };
 const setToBack = (id, sidebar_id) => {

@@ -1,4 +1,5 @@
-import { ACTION_CACHE } from "./cache";
+import { initActionCache, removeActionCache } from "./cache";
+
 import Vue from "vue";
 
 if (!window.$_drag_store) {
@@ -6,7 +7,7 @@ if (!window.$_drag_store) {
 }
 const store = window.$_drag_store;
 export const setDraggableContainer = (id) => {
-  ACTION_CACHE[id] = {};
+  initActionCache(id);
   Vue.set(store, id, {
     popup_ids: [],
     popup_ids_show: [],
@@ -23,7 +24,7 @@ export const setDraggableContainer = (id) => {
   });
 };
 export const removeDraggableContainer = (id) => {
-  delete ACTION_CACHE[id];
+  removeActionCache(id);
   Vue.delete(store, id);
 };
 export const getStoreDraggable = (id) => {
