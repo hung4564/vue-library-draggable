@@ -15,7 +15,7 @@
   },
   "bugs": "https://github.com/hung4564/vue-library-draggable/issues",
   "license": "MIT",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "files": [
     "dist/*",
     "types/*"
@@ -47,6 +47,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
     "vue-template-compiler": "^2.6.14"
   }

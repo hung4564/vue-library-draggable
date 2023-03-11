@@ -1,8 +1,8 @@
 import { ACTION_CACHE } from "./cache";
 import Vue from "vue";
 
-const store = new Vue.observable({});
-
+const store = window.$_drag_store || new Vue.observable({});
+window.$_drag_store = store;
 export const setDraggableContainer = (id) => {
   ACTION_CACHE[id] = {};
   Vue.set(store, id, {
@@ -24,7 +24,9 @@ export const removeDraggableContainer = (id) => {
   delete ACTION_CACHE[id];
   Vue.delete(store, id);
 };
-export const getStoreDraggable = (id) => store[id] || {};
+export const getStoreDraggable = (id) => {
+  return store[id] || window.$_drag_store[id] || {};
+};
 
 export const getParentProps = (id) => getStoreDraggable(id).parent;
 export const getParentWidth = (id) => getStoreDraggable(id).parent.width;

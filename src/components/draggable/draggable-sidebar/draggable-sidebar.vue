@@ -1,5 +1,6 @@
 <template>
   <component
+    v-if="c_containerId"
     v-bind:is="currentComponent"
     :containerId="c_containerId"
     v-bind="$attrs"
