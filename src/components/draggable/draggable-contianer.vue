@@ -64,8 +64,13 @@ export default {
     }
   },
   provide() {
+    const $drag = {};
+    Object.defineProperty($drag, "id", {
+      enumerable: true,
+      get: () => this.container_id
+    });
     return {
-      containerId: this.container_id
+      $drag
     };
   },
   methods: {

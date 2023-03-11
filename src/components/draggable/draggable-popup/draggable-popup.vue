@@ -1,7 +1,7 @@
 <template>
   <component
     v-bind:is="currentComponent"
-    :containerId="containerId"
+    :containerId="c_containerId"
     v-bind="$attrs"
     class="draggable-popup"
     :show.sync="c_show"
@@ -34,10 +34,13 @@ export default {
     title: {
       type: String,
       default: ""
-    }
+    },
+    containerId: String
   },
   inject: {
-    containerId: { default: "" }
+    $drag: {
+      default: () => ({})
+    }
   },
   data: () => ({
     p_zIndex: 0,
@@ -52,8 +55,11 @@ export default {
     }
   },
   computed: {
+    c_containerId() {
+      return this.containerId || this.$drag.id;
+    },
     isMobile() {
-      return isMobile(this.containerId);
+      return isMobile(this.c_containerId);
     },
     c_show: {
       get() {
