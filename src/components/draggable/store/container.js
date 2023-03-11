@@ -2,13 +2,12 @@ import { initActionCache, removeActionCache } from "./cache";
 
 import Vue from "vue";
 
-if (!window.$_drag_store) {
-  window.$_drag_store = new Vue.observable({});
+if (!Vue.prototype.$_drag_store) {
+  Vue.prototype.$_drag_store = new Vue.observable({});
 }
-const store = window.$_drag_store;
 export const setDraggableContainer = (id) => {
   initActionCache(id);
-  Vue.set(store, id, {
+  Vue.set(Vue.prototype.$_drag_store, id, {
     popup_ids: [],
     popup_ids_show: [],
     sidebar_ids: [],
@@ -25,10 +24,10 @@ export const setDraggableContainer = (id) => {
 };
 export const removeDraggableContainer = (id) => {
   removeActionCache(id);
-  Vue.delete(store, id);
+  Vue.delete(Vue.prototype.$_drag_store, id);
 };
 export const getStoreDraggable = (id) => {
-  return store[id] || window.$_drag_store[id] || {};
+  return Vue.prototype.$_drag_store[id] || {};
 };
 
 export const getParentProps = (id) => getStoreDraggable(id).parent;

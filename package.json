@@ -15,7 +15,7 @@
   },
   "bugs": "https://github.com/hung4564/vue-library-draggable/issues",
   "license": "MIT",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "files": [
     "dist/*",
     "types/*"
