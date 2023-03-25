@@ -31,6 +31,17 @@ yarn add @hungpv4564/vue-library-draggable
       <DraggableSidebar title="siderbar 1" show>
         <div style="height: 100vh"></div>
       </DraggableSidebar>
+
+      <DraggableFloat
+        show
+        title="popup 1"
+        :right="10"
+        :bottom="10"
+        :width="400"
+        headerLocation="bottom"
+      >
+        <div style="height: 100vh"></div>
+      </DraggableFloat>
     </DraggableContianer>
   </div>
 </template>
@@ -39,7 +50,8 @@ yarn add @hungpv4564/vue-library-draggable
 import {
   DraggableContianer,
   DraggablePopup,
-  DraggableSidebar
+  DraggableSidebar,
+  DraggableFloat
 } from "@hungpv4564/vue-library-draggable";
 export default {
   name: "App",
@@ -66,6 +78,7 @@ html,
 - [draggable-bottom](docs/draggable-bottom.md)
 - [draggable-popup](docs/draggable-popup.md)
 - [draggable-sidebar](docs/draggable-sidebar.md)
+- [draggable-float](docs/draggable-float.md)
 
 ## Contributing
 
