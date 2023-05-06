@@ -28,13 +28,11 @@
 
                 <template v-if="countPopup > 1 && !disabledOrder">
                   <map-button :disabled="isFirst" @click="onToBack()">
-                    <map-icon small>
-                      {{ ICON_CONFIG["action.to-back"] }}</map-icon
-                    >
+                    <ToBackIcon :size="18" />
                   </map-button>
                 </template>
                 <map-button v-if="!disabledClose" @click="onClose">
-                  <map-icon>{{ ICON_CONFIG["action.close"] }}</map-icon>
+                  <CloseIcon :size="18" />
                 </map-button>
               </div>
             </div>
@@ -49,22 +47,12 @@
     <div v-if="c_show && !disabledExpand" class="complex-button-close">
       <button @click="onToggleExpand">
         <span v-if="left">
-          <map-icon
-            :icon="
-              c_expand
-                ? ICON_CONFIG['action.sidebar-left-expanded']
-                : ICON_CONFIG['action.sidebar-left-close-expanded']
-            "
-          ></map-icon>
+          <SidebarLeftExpandedIcon v-if="c_expand" />
+          <SidebarLeftCloseExpandedIcon v-else />
         </span>
         <span v-else-if="right">
-          <map-icon
-            :icon="
-              c_expand
-                ? ICON_CONFIG['action.sidebar-right-expanded']
-                : ICON_CONFIG['action.sidebar-right-close-expanded']
-            "
-          ></map-icon>
+          <SidebarRightExpandedIcon v-if="c_expand" />
+          <SidebarRightCloseExpandedIcon v-else />
         </span>
       </button>
     </div>

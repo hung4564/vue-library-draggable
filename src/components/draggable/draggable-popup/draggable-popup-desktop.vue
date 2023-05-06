@@ -25,9 +25,10 @@
         <template v-if="!disabledHeader">
           <div class="draggable-popup-desktop-heading">
             <div class="draggable-popup-desktop-heading__content">
-              <map-icon class="drag grabbing">
-                {{ ICON_CONFIG["action.drag"] }}
-              </map-icon>
+              <div class="draggable-popup-desktop-heading__icon">
+                <DragIcon :size="18" />
+                <div class="drag grabbing"></div>.
+              </div>
               <div class="draggable-popup-desktop-heading__title">
                 <slot name="title"></slot>
               </div>
@@ -35,27 +36,19 @@
               <slot name="extra-btn"></slot>
               <template v-if="countPopup > 1 && !disabledOrder">
                 <map-button :disabled="isFirst" @click="onToBack()">
-                  <map-icon> {{ ICON_CONFIG["action.to-back"] }} </map-icon>
+                  <ToBackIcon :size="18" />
                 </map-button>
                 <map-button :disabled="isLast" @click="onToFront()">
-                  <map-icon>
-                    {{ ICON_CONFIG["action.to-front"] }}
-                  </map-icon>
+                  <ToFrontIcon :size="18" />
                 </map-button>
               </template>
 
               <map-button @click="toggleExpanded">
-                <map-icon
-                  :icon="
-                    isExpanded
-                      ? ICON_CONFIG['action.expanded']
-                      : ICON_CONFIG['action.close-expanded']
-                  "
-                >
-                </map-icon>
+                <ExpandedIcon v-if="isExpanded" />
+                <CloseExpandedIcon v-else />
               </map-button>
               <map-button v-if="!disabledClose" @click="onClose">
-                <map-icon>{{ ICON_CONFIG["action.close"] }} </map-icon>
+                <CloseIcon :size="18" />
               </map-button>
             </div>
           </div>
@@ -274,9 +267,6 @@ export default {
   z-index: 0;
   flex: 1 1 auto;
 }
-.draggable-popup-desktop-heading__content .drag {
-  margin: 4px;
-}
 .draggable-popup-desktop-heading,
 .draggable-popup-desktop-heading__content {
   height: 48px;
@@ -294,5 +284,25 @@ export default {
 .draggable-popup-desktop-content {
   flex-grow: 1;
   overflow: auto;
+}
+.draggable-popup-desktop-heading__icon {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  flex-grow: 0;
+}
+.draggable-popup-desktop-heading__icon > .material-design-icon {
+  margin-top: 8px;
+  margin-left: 4px;
+}
+.draggable-popup-desktop-heading__icon .drag {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 30px;
+  z-index: 2;
 }
 </style>

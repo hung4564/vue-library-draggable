@@ -1,5 +1,3 @@
-import "@mdi/font/css/materialdesignicons.css";
-
 import App from "./App.vue";
 import Vue from "vue";
 

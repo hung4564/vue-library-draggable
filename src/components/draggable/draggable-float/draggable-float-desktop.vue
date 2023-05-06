@@ -20,24 +20,16 @@
               <div class="map-spacer"></div>
               <slot name="extra-btn"></slot>
               <map-button @click="onToggleExpand">
-                <map-icon
-                  :icon="
-                    c_expand
-                      ? ICON_CONFIG['action.expanded']
-                      : ICON_CONFIG['action.close-expanded']
-                  "
-                >
-                </map-icon>
+                <ExpandedIcon v-if="c_expand" />
+                <CloseExpandedIcon v-else />
               </map-button>
               <template v-if="countPopup > 1 && !disabledOrder">
                 <map-button :disabled="isFirst" @click="onToBack()">
-                  <map-icon small>
-                    {{ ICON_CONFIG["action.to-back"] }}</map-icon
-                  >
+                  <ToBackIcon :size="18" />
                 </map-button>
               </template>
               <map-button v-if="!disabledClose" @click="onClose">
-                <map-icon>{{ ICON_CONFIG["action.close"] }}</map-icon>
+                <CloseIcon :size="18" />
               </map-button>
             </div>
           </div>
@@ -61,24 +53,16 @@
               <div class="map-spacer"></div>
               <slot name="extra-btn"></slot>
               <map-button @click="onToggleExpand">
-                <map-icon
-                  :icon="
-                    c_expand
-                      ? ICON_CONFIG['action.expanded']
-                      : ICON_CONFIG['action.close-expanded']
-                  "
-                >
-                </map-icon>
+                <ExpandedIcon v-if="c_expand" />
+                <CloseExpandedIcon v-else />
               </map-button>
               <template v-if="countPopup > 1 && !disabledOrder">
                 <map-button :disabled="isFirst" @click="onToBack()">
-                  <map-icon small>
-                    {{ ICON_CONFIG["action.to-back"] }}</map-icon
-                  >
+                  <ToBackIcon :size="18" />
                 </map-button>
               </template>
               <map-button v-if="!disabledClose" @click="onClose">
-                <map-icon>{{ ICON_CONFIG["action.close"] }}</map-icon>
+                <CloseIcon :size="18" />
               </map-button>
             </div>
           </div>

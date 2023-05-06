@@ -23,9 +23,7 @@
                 small
                 @click.prevent.stop="onToBack()"
               >
-                <map-icon>
-                  {{ ICON_CONFIG["action.to-back"] }}
-                </map-icon>
+                <ToBackIcon :size="18" />
               </map-button>
               <!-- <map-button
               :disabled="isLast"
@@ -37,15 +35,11 @@
             </map-button> -->
             </template>
             <map-button icon small @click="onFullScreen()">
-              <map-icon v-if="isFullScreen">
-                {{ ICON_CONFIG["action.on-fullscreen"] }}
-              </map-icon>
-              <map-icon v-else>
-                {{ ICON_CONFIG["action.off-fullscreen"] }}
-              </map-icon>
+              <FullscreenIcon :size="18" v-if="isFullScreen" />
+              <OffFullscreenIcon :size="18" v-else />
             </map-button>
             <map-button v-if="!disabledClose" icon small @click="onClose">
-              <map-icon>{{ ICON_CONFIG["action.close"] }}</map-icon>
+              <CloseIcon :size="18" />
             </map-button>
           </div>
 
