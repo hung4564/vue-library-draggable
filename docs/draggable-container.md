@@ -15,9 +15,10 @@
 
 ## Events
 
-| Name      | Description |
-| --------- | ----------- |
-| init-done | {id:String} |
+| Name                | Description                            |
+| ------------------- | -------------------------------------- |
+| init-done           | {id:String}                            |
+| show-count:side-bar | {left_count:Number,right_count:Number} |
 
 ## Slots
 

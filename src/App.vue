@@ -8,6 +8,9 @@
       <DraggableSidebar title="siderbar 1" show>
         <div style="height: 100vh"></div>
       </DraggableSidebar>
+      <DraggableSidebar title="siderbar 2" show right>
+        <div style="height: 100vh"></div>
+      </DraggableSidebar>
 
       <DraggableFloat
         show

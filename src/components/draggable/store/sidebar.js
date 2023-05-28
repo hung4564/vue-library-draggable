@@ -26,6 +26,10 @@ const registerShow = (id, sidebar_id, show) => {
   if (!id || !sidebar_id) return;
   setShowId(id, sidebar_id, show);
   updateAllIndex(id);
+  let store = getStoreDraggable(id);
+  if (store.callWhenChangeSidebar) {
+    store.callWhenChangeSidebar();
+  }
 };
 const setShowId = (id, sidebar_id, show) => {
   if (!id || !sidebar_id) return;

@@ -11,9 +11,11 @@ import {
   removeDraggableContainer,
   setDraggableContainer,
   setParentProps,
-  getStoreDraggable,
-  setCardComponent
+  setCardComponent,
+  setEmitForChangeSideBar,
+  getStoreDraggable
 } from "./store/store-draggable";
+import { getFunctionActionCache } from "./store/cache";
 export default {
   props: {
     cardComponent: { type: String, default: "map-card" },
@@ -51,6 +53,30 @@ export default {
       this.init_done = true;
       this.$emit("init-done", { id: this.container_id });
     });
+    if (this.$listeners["show-count:side-bar"])
+      setEmitForChangeSideBar(this.container_id, () => {
+        let store = getStoreDraggable(this.container_id);
+        if (!store) {
+          return;
+        }
+        let sidebar_ids_show = store.sidebar_ids_show;
+        let left_count = 0,
+          right_count = 0;
+        sidebar_ids_show.forEach((sidebar_id) => {
+          let action = getFunctionActionCache(this.container_id, sidebar_id);
+          if (!action) return;
+          let position = action.position;
+          if (position === "right") {
+            right_count++;
+          } else if (position === "left") {
+            left_count++;
+          }
+        });
+        this.$emit("show-count:side-bar", {
+          left_count,
+          right_count
+        });
+      });
     this.onUpdateCardComponent();
   },
   beforeDestroy() {
@@ -58,11 +84,6 @@ export default {
     window.removeEventListener("resize", this.onResize);
   },
 
-  computed: {
-    store() {
-      return getStoreDraggable(this.container_id);
-    }
-  },
   provide() {
     const $drag = {};
     Object.defineProperty($drag, "id", {

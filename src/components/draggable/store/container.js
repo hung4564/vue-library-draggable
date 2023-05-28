@@ -74,3 +74,7 @@ export const getCardBottomComponent = (id) => {
   let store = getStoreDraggable(id);
   return store.cardBottomComponent || store.cardComponent;
 };
+export const setEmitForChangeSideBar = (id, cb) => {
+  let store = getStoreDraggable(id);
+  store.callWhenChangeSidebar = cb;
+};
