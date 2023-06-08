@@ -5,11 +5,11 @@
 ## Install
 
 ```
-npm i @hungpv4564/vue-library-draggable
+npm i @hungpv97/vue-library-draggable
 ```
 
 ```
-yarn add @hungpv4564/vue-library-draggable
+yarn add @hungpv97/vue-library-draggable
 ```
 
 ## Usage
@@ -52,7 +52,7 @@ import {
   DraggablePopup,
   DraggableSidebar,
   DraggableFloat
-} from "@hungpv4564/vue-library-draggable";
+} from "@hungpv97/vue-library-draggable";
 export default {
   name: "App",
   components: { DraggableContianer, DraggablePopup, DraggableSidebar }

@@ -1,5 +1,5 @@
 import { VueConstructor } from "vue";
-declare module "@hungpv4564/vue-library-draggable" {
+declare module "@hungpv97/vue-library-draggable" {
   const DraggableContianer: VueConstructor;
   const DraggablePopup: VueConstructor;
   const DraggableSidebar: VueConstructor;
