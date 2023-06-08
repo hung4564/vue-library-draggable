@@ -26,8 +26,8 @@
           <div class="draggable-popup-desktop-heading">
             <div class="draggable-popup-desktop-heading__content">
               <div class="draggable-popup-desktop-heading__icon">
-                <DragIcon :size="18" />
-                <div class="drag grabbing"></div>.
+                <DragIcon :size="16" />
+                <div class="drag grabbing"></div>
               </div>
               <div class="draggable-popup-desktop-heading__title">
                 <slot name="title"></slot>
@@ -36,19 +36,19 @@
               <slot name="extra-btn"></slot>
               <template v-if="countPopup > 1 && !disabledOrder">
                 <map-button :disabled="isFirst" @click="onToBack()">
-                  <ToBackIcon :size="18" />
+                  <ToBackIcon :size="16" />
                 </map-button>
                 <map-button :disabled="isLast" @click="onToFront()">
-                  <ToFrontIcon :size="18" />
+                  <ToFrontIcon :size="16" />
                 </map-button>
               </template>
 
               <map-button @click="toggleExpanded">
-                <ExpandedIcon v-if="isExpanded" />
-                <CloseExpandedIcon v-else />
+                <ExpandedIcon v-if="isExpanded" :size="16" />
+                <CloseExpandedIcon v-else :size="16" />
               </map-button>
               <map-button v-if="!disabledClose" @click="onClose">
-                <CloseIcon :size="18" />
+                <CloseIcon :size="16" />
               </map-button>
             </div>
           </div>

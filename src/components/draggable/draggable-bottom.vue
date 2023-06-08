@@ -23,7 +23,7 @@
                 small
                 @click.prevent.stop="onToBack()"
               >
-                <ToBackIcon :size="18" />
+                <ToBackIcon :size="16" />
               </map-button>
               <!-- <map-button
               :disabled="isLast"
@@ -35,11 +35,11 @@
             </map-button> -->
             </template>
             <map-button icon small @click="onFullScreen()">
-              <FullscreenIcon :size="18" v-if="isFullScreen" />
-              <OffFullscreenIcon :size="18" v-else />
+              <FullscreenIcon :size="16" v-if="isFullScreen" />
+              <OffFullscreenIcon :size="16" v-else />
             </map-button>
             <map-button v-if="!disabledClose" icon small @click="onClose">
-              <CloseIcon :size="18" />
+              <CloseIcon :size="16" />
             </map-button>
           </div>
 

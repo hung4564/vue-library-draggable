@@ -20,16 +20,16 @@
               <div class="map-spacer"></div>
               <slot name="extra-btn"></slot>
               <map-button @click="onToggleExpand">
-                <ExpandedIcon v-if="c_expand" />
-                <CloseExpandedIcon v-else />
+                <ExpandedIcon v-if="c_expand" :size="16" />
+                <CloseExpandedIcon v-else :size="16" />
               </map-button>
               <template v-if="countPopup > 1 && !disabledOrder">
                 <map-button :disabled="isFirst" @click="onToBack()">
-                  <ToBackIcon :size="18" />
+                  <ToBackIcon :size="16" />
                 </map-button>
               </template>
               <map-button v-if="!disabledClose" @click="onClose">
-                <CloseIcon :size="18" />
+                <CloseIcon :size="16" />
               </map-button>
             </div>
           </div>
@@ -53,16 +53,16 @@
               <div class="map-spacer"></div>
               <slot name="extra-btn"></slot>
               <map-button @click="onToggleExpand">
-                <ExpandedIcon v-if="c_expand" />
-                <CloseExpandedIcon v-else />
+                <ExpandedIcon v-if="c_expand" :size="16" />
+                <CloseExpandedIcon v-else :size="16" />
               </map-button>
               <template v-if="countPopup > 1 && !disabledOrder">
                 <map-button :disabled="isFirst" @click="onToBack()">
-                  <ToBackIcon :size="18" />
+                  <ToBackIcon :size="16" />
                 </map-button>
               </template>
               <map-button v-if="!disabledClose" @click="onClose">
-                <CloseIcon :size="18" />
+                <CloseIcon :size="16" />
               </map-button>
             </div>
           </div>
