@@ -4,7 +4,6 @@
     v-bind="$attrs"
     dragHandle=".drag"
     :h="p_height"
-    is-active
     :minh="c_minHeight"
     :minw="c_minWidth"
     parent-limitation
@@ -69,19 +68,16 @@ import MapButton from "../../MapButton.vue";
 import VueDragResize from "vue-drag-resize";
 import { isNil } from "lodash";
 import ModuleMixin from "../draggable-popup.mixin";
-import {
-  getCardPopupComponent,
-  getParentHeight,
-  getParentWidth,
-  getPopupIdsShow
-} from "../store/store-draggable";
+import { getParentHeight, getParentWidth } from "../store/config";
 import {
   register,
   registerShow,
   unRegister,
   setToBack,
-  setToFront
-} from "../store/popup";
+  setToFront,
+  getIdsShow
+} from "../store/item/popup";
+import { getCardPopupComponent } from "../store/component";
 import { getUUIDv4 } from "@/utils";
 export default {
   mixins: [ModuleMixin],
@@ -118,9 +114,9 @@ export default {
     this.p_height = this.height;
     this.p_width = this.width;
     register(this.containerId, this.drag_id, {
-      setIndex: this.onSetIndex.bind(this)
+      setIndex: this.onSetIndex.bind(this),
+      show: this.show
     });
-    registerShow(this.containerId, this.drag_id, this.show);
     this.$nextTick(() => {
       if (this.show)
         this.$nextTick(() => {
@@ -161,20 +157,6 @@ export default {
         "map-card"
       );
     },
-    c_popupIds() {
-      return getPopupIdsShow(this.containerId);
-    },
-    c_show: {
-      get() {
-        return this.p_show;
-      },
-      set(val) {
-        this.p_show = val;
-        this.$emit("update:show", val);
-        if (this.containerId && this.drag_id)
-          registerShow(this.containerId, this.drag_id, val);
-      }
-    },
     isExpanded() {
       return this.p_height > 50;
     },
@@ -192,6 +174,10 @@ export default {
     }
   },
   methods: {
+    registerShow(val) {
+      if (this.containerId && this.drag_id)
+        registerShow(this.containerId, this.drag_id, val);
+    },
     activateEv() {
       this.isActive = true;
     },
@@ -234,6 +220,9 @@ export default {
     },
     onToFront() {
       setToFront(this.containerId, this.drag_id);
+    },
+    getIdsShow() {
+      return getIdsShow(this.containerId, this.drag_id);
     }
   }
 };

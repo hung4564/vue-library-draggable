@@ -58,17 +58,16 @@ import MapCard from "../MapCard.vue";
 import MapIcon from "../MapIcon.vue";
 import MapButton from "../MapButton.vue";
 import ModuleMixin from "./draggable-popup.mixin";
-import {
-  getCardBottomComponent,
-  getMobileIdsShow
-} from "./store/store-draggable";
+
+import { getCardBottomComponent } from "./store/component";
 import {
   register,
   registerShow,
   unRegister,
   setToBack,
-  setToFront
-} from "./store/mobile";
+  setToFront,
+  getIdsShow
+} from "./store/item/mobile";
 import { getUUIDv4 } from "@/utils";
 export default {
   components: { MapIcon, MapButton, MapCard },
@@ -80,9 +79,9 @@ export default {
   }),
   mounted() {
     register(this.containerId, this.drag_id, {
-      setIndex: this.onSetIndex.bind(this)
+      setIndex: this.onSetIndex.bind(this),
+      show: this.show
     });
-    registerShow(this.containerId, this.drag_id, this.show);
   },
   beforeDestroy() {
     unRegister(this.containerId, this.drag_id);
@@ -95,23 +94,13 @@ export default {
         getCardBottomComponent(this.containerId) ||
         "map-card"
       );
-    },
-    c_show: {
-      get() {
-        return this.p_show;
-      },
-      set(val) {
-        this.p_show = val;
-        this.$emit("update:show", val);
-        if (this.containerId && this.drag_id)
-          registerShow(this.containerId, this.drag_id, val);
-      }
-    },
-    c_popupIds() {
-      return getMobileIdsShow(this.containerId);
     }
   },
   methods: {
+    registerShow(val) {
+      if (this.containerId && this.drag_id)
+        registerShow(this.containerId, this.drag_id, val);
+    },
     onFullScreen() {
       this.isFullScreen = !this.isFullScreen;
     },
@@ -120,6 +109,9 @@ export default {
     },
     onToFront() {
       setToFront(this.containerId, this.drag_id);
+    },
+    getIdsShow() {
+      return getIdsShow(this.containerId, this.drag_id);
     }
   }
 };

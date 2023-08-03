@@ -70,12 +70,10 @@ import {
   registerShow,
   unRegister,
   setToBack,
-  setToFront
-} from "../store/sidebar";
-import {
-  getCardSidebarComponent,
-  getSidebarIdsShow
-} from "../store/store-draggable";
+  setToFront,
+  getIdsShow
+} from "../store/item/sidebar";
+import { getCardSidebarComponent } from "../store/component";
 export default {
   mixins: [ModuleMixin],
   components: { MapCard, MapIcon, MapButton },
@@ -97,16 +95,16 @@ export default {
     show: {
       handler(val) {
         this.c_show = val;
-      },
-      immediate: true
+      }
     }
   },
   mounted() {
+    this.p_show = this.show;
     register(this.containerId, this.drag_id, {
       setIndex: this.onSetIndex.bind(this),
-      position: this.position
+      position: this.position,
+      show: this.show
     });
-    registerShow(this.containerId, this.drag_id, this.show);
   },
   beforeDestroy() {
     unRegister(this.containerId, this.drag_id);
@@ -136,30 +134,13 @@ export default {
     },
     position() {
       return this.right ? "right" : "left";
-    },
-    c_popupIds() {
-      if (this.right) return this.c_right_popupIds;
-      return this.c_left_popupIds;
-    },
-    c_right_popupIds() {
-      return getSidebarIdsShow(this.containerId, "right");
-    },
-    c_left_popupIds() {
-      return getSidebarIdsShow(this.containerId, "left");
-    },
-    c_show: {
-      get() {
-        return this.p_show;
-      },
-      set(val) {
-        this.p_show = val;
-        this.$emit("update:show", val);
-        if (this.containerId && this.drag_id)
-          registerShow(this.containerId, this.drag_id, val);
-      }
     }
   },
   methods: {
+    registerShow(val) {
+      if (this.containerId && this.drag_id)
+        registerShow(this.containerId, this.drag_id, val);
+    },
     onClose() {
       this.c_show = false;
     },
@@ -171,6 +152,9 @@ export default {
     },
     onToggleExpand() {
       this.c_expand = !this.c_expand;
+    },
+    getIdsShow() {
+      return getIdsShow(this.containerId, this.drag_id);
     }
   }
 };

@@ -25,7 +25,7 @@
 <script>
 import DraggableFloatDesktop from "./draggable-float-desktop.vue";
 import DraggableBottom from "../draggable-bottom.vue";
-import { isMobile } from "../store/store-draggable";
+import { isMobile } from "../store/config";
 export default {
   components: {
     DraggableFloatDesktop,

@@ -1,4 +1,4 @@
-import { checkIsFirst, checkIsLast } from "./store/store-draggable";
+import { checkIsFirst, checkIsLast } from "@/utils/array";
 
 import ArrangeBringForwardIcon from "vue-material-design-icons/ArrangeBringForward.vue";
 import ArrangeSendBackwardIcon from "vue-material-design-icons/ArrangeSendBackward.vue";
@@ -37,10 +37,15 @@ export default {
     cardComponent: { type: String }
   },
   inject: [],
-  data: () => ({ isLast: false, isFirst: false, p_zIndex: 0 }),
+  data: () => ({
+    isLast: false,
+    isFirst: false,
+    p_zIndex: 0,
+    items: [],
+    p_show: false
+  }),
   watch: {
     p_zIndex: { handler: "updateZIndex", immediate: true },
-    c_popupIds: { handler: "updateZIndex" },
     show: {
       handler(val) {
         this.p_show = val;
@@ -51,39 +56,39 @@ export default {
   computed: {
     c_show: {
       get() {
-        return this.show;
+        return this.p_show;
       },
       set(val) {
+        this.p_show = val;
         this.$emit("update:show", val);
+        this.registerShow(val);
       }
     },
-    c_popupIds() {
-      return [];
-    },
     countPopup() {
-      return this.c_popupIds.length;
+      return this.items.length;
     }
   },
   methods: {
+    close() {
+      this.c_show = false;
+    },
+    open() {
+      this.c_show = true;
+    },
+    registerShow() {},
     updateZIndex() {
-      this.$nextTick(() => {
-        this.isLast = checkIsLast(
-          this.containerId,
-          this.drag_id,
-          this.c_popupIds
-        );
-        this.isFirst = checkIsFirst(
-          this.containerId,
-          this.drag_id,
-          this.c_popupIds
-        );
-      });
+      this.items = this.getIdsShow();
+      this.isLast = checkIsLast(this.containerId, this.drag_id, this.items);
+      this.isFirst = checkIsFirst(this.containerId, this.drag_id, this.items);
     },
     onSetIndex(index) {
       this.p_zIndex = index;
     },
     onClose() {
       this.c_show = false;
+    },
+    getIdsShow() {
+      return [];
     }
   }
 };

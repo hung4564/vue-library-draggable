@@ -26,7 +26,7 @@
 <script>
 import DraggableSidebarDesktop from "./draggable-sidebar-desktop.vue";
 import DraggableBottom from "../draggable-bottom.vue";
-import { isMobile } from "../store/store-draggable";
+import { isMobile } from "../store/config";
 export default {
   components: {
     DraggableSidebarDesktop,
