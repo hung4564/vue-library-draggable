@@ -61,6 +61,9 @@ export default {
       set(val) {
         this.p_show = val;
         this.$emit("update:show", val);
+        if (!val) {
+          this.$emit("close");
+        }
         this.registerShow(val);
       }
     },
